@@ -1,5 +1,20 @@
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
 public class Hangman {
+
+    Set<String> usedWordsSet = new HashSet<>();
+    List<String> wordList = new ArrayList<>();
+
+    
 
     public int countAlphabetinAWord(String word, char alphabet) {
         int count = 0;
@@ -12,5 +27,32 @@ public class Hangman {
       
     }
 
+    
+    public String fetchWord(int requestedLength) {
+       for (String result: wordList) {
+           if (result.length() != requestedLength) continue;
+           else if (usedWordsSet.add(result)) 
+               return result;
+        
+       }
+         return null;
+    }
 
+
+public void loadWords() {
+    try(BufferedReader br = new BufferedReader(new FileReader("WordSource.txt"))) {
+        String word;
+        while((word = br.readLine()) != null) {
+            wordList.add(word);
+        }
+    }
+    catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+}
 }

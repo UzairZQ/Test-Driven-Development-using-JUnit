@@ -5,13 +5,17 @@
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 import org.junit.Test;
 
 /**
  *
  * @author uzair99
  */
-public class TestHangman {
+ public class TestHangman {
 
     @Test
     public void test_countAlphabetinAWord() {
@@ -26,4 +30,34 @@ public class TestHangman {
 
     }
 
+    
+    @Test 
+    public void test_lengthOfFetchedWordRandom() {
+        Hangman hangman = new Hangman();
+        Random random = new Random();
+        hangman.loadWords();
+        int requestedLength = random.nextInt(6) + 5; // Random length between 5 and 10
+        String word = hangman.fetchWord(requestedLength);
+        assertTrue(requestedLength == word.length());
+    
+    }
+
+    @Test 
+    public void test_uniquessofFetchedWord() {
+        Hangman hangman = new Hangman();
+hangman.loadWords();
+        Random random = new Random();
+        int requestedLength = 0;
+        Set<String> usedWordSet = new HashSet<>();
+        int round = 0;
+        String word;
+        while (round < 100) {
+            requestedLength = random.nextInt(6) + 5; // Random length between 5 and 10
+            word = hangman.fetchWord(requestedLength);
+            round++;
+
+            assertTrue(usedWordSet.add(word));
+        }
+
+    }
 }
