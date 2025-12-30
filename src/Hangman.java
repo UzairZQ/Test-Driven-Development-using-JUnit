@@ -55,4 +55,30 @@ public void loadWords() {
 
 
 }
+
+
+public String fetchClue(String word) {
+    StringBuilder clueBuilder = new StringBuilder();
+    for (int i = 0; i < word.length(); i++) {
+        clueBuilder.append("-");
+    }
+    return clueBuilder.toString();
+   
+}
+
+public String fetchClue(String word, String clue, char guess) {
+    StringBuilder newClueBuilder = new StringBuilder();
+    for (int i = 0; i < word.length(); i++) {
+
+        if(guess == word.charAt(i) && guess != clue.charAt(i)) {
+            newClueBuilder.append(guess);
+        } 
+        else
+        newClueBuilder.append("-");
+    }
+    return newClueBuilder.toString();
+   
+}
+
+
 }

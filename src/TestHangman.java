@@ -58,6 +58,32 @@ hangman.loadWords();
 
             assertTrue(usedWordSet.add(word));
         }
+    }
+
+
+    @Test 
+    public void test_fetchClueBeforeAnyGuess() {
+        Hangman hangman = new Hangman();
+       String clue = hangman.fetchClue("pizza");
+       assertEquals("-----", clue);
 
     }
+
+    @Test
+    public void test_FetchClueAfterCorrectGuess(){
+        Hangman hangman = new Hangman();
+        String clue = hangman.fetchClue("pizza");
+        String newClue = hangman.fetchClue("pizza", clue, 'a');
+        assertEquals("----a", newClue);
+
+    }
+
+    @Test
+    public void test_FetchClueAfterInCorrectGuess(){
+        Hangman hangman = new Hangman();
+        String clue = hangman.fetchClue("pizza");
+        String newClue = hangman.fetchClue("pizza", clue, 'b');
+        assertEquals("-----", newClue);
+    }
+
 }
