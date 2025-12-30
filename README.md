@@ -1,18 +1,33 @@
-## Getting Started
+# HangMan — TDD with JUnit
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is a small Java project I built to learn and practice **Test‑Driven Development (TDD)** using **JUnit**. The idea was to implement the classic Hangman game incrementally: write a failing test, make it pass, then refactor.
 
-## Folder Structure
+## Why this project
 
-The workspace contains two folders by default, where:
+- Practice writing small, focused unit tests with JUnit
+- Learn the TDD workflow (red → green → refactor)
+- Explore simple game logic and design in Java
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Getting started
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Open the project in **VS Code** (I recommend the Java and Test Runner extensions)
+- Run the tests from the **Test Explorer** or with your preferred build tool (Maven/Gradle)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+If you want to compile and run manually (assuming you have JUnit jars in `lib`):
 
-## Dependency Management
+```bash
+javac -cp "lib/*:." -d bin src/*.java
+java -cp "lib/*:bin" org.junit.runner.JUnitCore TestHangman
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Project structure
+
+- `src/` — source files (`App.java`, `Hangman.java`, `TestHangman.java`)
+- `lib/` — dependency jars (e.g., JUnit)
+- `bin/` — compiled classes
+
+## Notes
+
+- This is my personal learning repo — feedback and small PRs are welcome.
+- Author: Uzair
+
