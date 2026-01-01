@@ -113,5 +113,59 @@ hangman.loadWords();
     Exception e =  assertThrows(IllegalArgumentException.class, () -> hangman.fetchClue("pizza", "-----", '1'));
 
         assertEquals("Invalid guess: must be a letter", e.getMessage());
-        }
+        
+    
+    }
+
+    @Test
+    public void test_remainingTrialsBeforeAnyGuess(){
+        Hangman hangman = new Hangman();
+                Random random = new Random();
+
+        int requestedLength = random.nextInt(6) + 5;
+        hangman.fetchWord(requestedLength);
+        assertEquals(Hangman.MAX_TRIALS,  hangman.remainingtrials);
+    }
+
+    @Test
+    public void test_remainingTrialsAfterOneGuess(){
+        Hangman hangman = new Hangman();
+                Random random = new Random();
+hangman.fetchClue("pizza", "-----", 'a');
+        int requestedLength = random.nextInt(6) + 5;
+        hangman.fetchWord(requestedLength);
+        assertEquals(Hangman.MAX_TRIALS - 1,  hangman.remainingtrials);
+    }
+
+@Test
+public void test_scoreBeforeAnyGuess(){
+    Hangman hangman = new Hangman();
+    Random random = new Random();
+    int requestedLength = random.nextInt(6) + 5;
+    hangman.fetchWord(requestedLength);
+    assertEquals(0.0, hangman.score, 1e-6);
+}
+
+
+@Test
+public void test_scoreAfterCorrectGuess(){
+    Hangman hangman = new Hangman();
+    hangman.score = 0;
+    String word = "pizza";
+    String clue = "-----";
+    char guess = 'a';
+    hangman.fetchClue(word, clue, guess);
+        assertEquals((double)Hangman.MAX_TRIALS / word.length(), hangman.score, 1e-6);
+    }
+
+    @Test
+public void test_scoreAfterInCorrectGuess(){
+    Hangman hangman = new Hangman();
+    hangman.score = 0;
+    String word = "pizza";
+    String clue = "-----";
+    char guess = 'x';
+    hangman.fetchClue(word, clue, guess);
+        assertEquals(0.0, hangman.score, 1e-6);
+    }
 }

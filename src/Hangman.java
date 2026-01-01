@@ -11,8 +11,11 @@ import java.util.Set;
 
 public class Hangman {
 
+    public static final int MAX_TRIALS = 10;
     Set<String> usedWordsSet = new HashSet<>();
     List<String> wordList = new ArrayList<>();
+    public int remainingtrials;
+    public double score;
 
     
 
@@ -29,6 +32,7 @@ public class Hangman {
 
     
     public String fetchWord(int requestedLength) {
+        if (remainingtrials == 0) remainingtrials = MAX_TRIALS;
        for (String result: wordList) {
            if (result.length() != requestedLength) continue;
            else if (usedWordsSet.add(result)) 
@@ -67,6 +71,8 @@ public String fetchClue(String word) {
 }
 
 public String fetchClue(String word, String clue, char guess) {
+        if (remainingtrials == 0) remainingtrials = MAX_TRIALS;
+        remainingtrials--;
 
         if(guess >= 'A' && guess <= 'Z') 
             guess += 32; // Convert to lowercase
@@ -78,6 +84,7 @@ public String fetchClue(String word, String clue, char guess) {
 
         if(guess == word.charAt(i) && guess != clue.charAt(i)) {
             newClueBuilder.append(guess);
+            score += (double)MAX_TRIALS / word.length();
         } 
         else
         newClueBuilder.append("-");
