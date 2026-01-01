@@ -86,4 +86,32 @@ hangman.loadWords();
         assertEquals("-----", newClue);
     }
 
+    @Test   
+    public void test_add(){
+        int x = 5;
+        int y = 10;
+        Hangman hangman = new Hangman();
+        hangman.addWords(x,y);
+        assertEquals(x + y, hangman.addWords(x,y));
+    }
+
+    @Test
+    public void test_whenInvalidGuessThenFetchClueThrowsException(){
+       
+        Hangman hangman = new Hangman();
+
+    assertThrows(IllegalArgumentException.class, () -> hangman.fetchClue("pizza", "-----", '1'));
+    
+}
+    
+
+@Test
+        public void test_whenInvalidGuessThenFetchClueThrowsExceptionWithAMessage(){
+        
+            Hangman hangman = new Hangman();
+
+    Exception e =  assertThrows(IllegalArgumentException.class, () -> hangman.fetchClue("pizza", "-----", '1'));
+
+        assertEquals("Invalid guess: must be a letter", e.getMessage());
+        }
 }

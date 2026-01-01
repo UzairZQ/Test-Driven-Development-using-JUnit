@@ -67,6 +67,12 @@ public String fetchClue(String word) {
 }
 
 public String fetchClue(String word, String clue, char guess) {
+
+        if(guess >= 'A' && guess <= 'Z') 
+            guess += 32; // Convert to lowercase
+
+        if(guess < 'a' || guess > 'z') 
+            throw new IllegalArgumentException("Invalid guess: must be a letter");        
     StringBuilder newClueBuilder = new StringBuilder();
     for (int i = 0; i < word.length(); i++) {
 
@@ -81,4 +87,11 @@ public String fetchClue(String word, String clue, char guess) {
 }
 
 
+public int addWords(int x, int y) {
+
+    x=5;
+    y=10;
+   
+    return x + y;  
+ }
 }
